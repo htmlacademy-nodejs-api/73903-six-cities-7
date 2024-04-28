@@ -7,7 +7,7 @@ export class CLIApplication {
   private commands: CommandCollection = {};
 
   constructor(
-    private readonly defaultCommand: string = '--help'
+    private readonly defaultCommand: string = '--help',
   ) {}
 
   public registerCommands(commandList: Command[]): void {
@@ -17,6 +17,10 @@ export class CLIApplication {
       }
       this.commands[command.getName()] = command;
     });
+  }
+
+  public getCommands(): CommandCollection {
+    return this.commands;
   }
 
   public getCommand(commandName: string): Command {

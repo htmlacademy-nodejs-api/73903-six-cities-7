@@ -1,9 +1,13 @@
-import { Command } from './command.interface.js';
+import { Command, CommandHelpInfo } from './command.interface.js';
 import { TSVFileReader } from '../../shared/libs/file-reader/tsv-file-reader.js';
 
 export class ImportCommand implements Command {
   public getName(): string {
     return '--import';
+  }
+
+  public getHelpInfo(): CommandHelpInfo {
+    return {description: 'импортирует данные из TSV', args: '<path>'};
   }
 
   public execute(...parameters: string[]): void {

@@ -5,7 +5,7 @@ import { CLIApplication, HelpCommand, VersionCommand, ImportCommand } from './cl
 function bootstrap() {
   const cliApplication = new CLIApplication();
   cliApplication.registerCommands([
-    new HelpCommand(),
+    new HelpCommand(cliApplication),
     new VersionCommand(),
     new ImportCommand()
   ]);
