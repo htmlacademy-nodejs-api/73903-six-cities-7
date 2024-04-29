@@ -98,11 +98,11 @@ export class TSVFileReader extends EventEmitter implements FileReader {
         importedRowCount++;
 
         const parsedProperty = this.parseLineToProperty(completeRow);
-        this.emit('tsc-reader:read-line', parsedProperty);
+        this.emit('tsv-reader:read-line', parsedProperty);
       }
     }
 
-    this.emit('tsc-reader:eof', importedRowCount);
+    this.emit('tsv-reader:eof', importedRowCount);
 
   }
 }

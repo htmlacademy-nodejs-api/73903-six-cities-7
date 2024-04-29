@@ -24,8 +24,8 @@ export class ImportCommand implements Command {
     const [filename] = parameters;
     const fileReader = new TSVFileReader(filename.trim());
 
-    fileReader.on('tsc-reader:read-line', this.onImportedProperty);
-    fileReader.on('tsc-reader:eof', this.onCompleteImport);
+    fileReader.on('tsv-reader:read-line', this.onImportedProperty);
+    fileReader.on('tsv-reader:eof', this.onCompleteImport);
 
     try {
       fileReader.read();
