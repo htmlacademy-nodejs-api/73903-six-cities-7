@@ -1,10 +1,11 @@
 import got from 'got';
-import { appendFile } from 'node:fs/promises';
 
 import { Command } from './command.interface.js';
 import { CommandHelpInfo } from './command.interface.js';
 import { MockServerData } from '../../shared/types/index.js';
 import { TSVProperyGenerator } from '../../shared/libs/property-generator/tsv-property-generator.js';
+import { getErrorMessage } from '../../shared/helpers/index.js';
+import { TSVFileWriter } from '../../shared/libs/file-writer/index.js';
 
 export class GenerateCommand implements Command {
   private initialData: MockServerData;
@@ -19,12 +20,10 @@ export class GenerateCommand implements Command {
 
   private async write(filepath: string, propertyCount: number) {
     const tsvPropertyGenerator = new TSVProperyGenerator(this.initialData);
+    const tsvFileWriter = new TSVFileWriter(filepath);
+
     for (let i = 0; i < propertyCount; i++) {
-      await appendFile(
-        filepath,
-        `${tsvPropertyGenerator.generate()}\n`,
-        { encoding: 'utf8' }
-      );
+      await tsvFileWriter.write(tsvPropertyGenerator.generate());
     }
   }
 
@@ -46,10 +45,7 @@ export class GenerateCommand implements Command {
       console.info(`File ${filepath} was created!`);
     } catch (error: unknown) {
       console.error('Can\'t generate data');
-
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+      console.error(getErrorMessage(error));
     }
   }
 }

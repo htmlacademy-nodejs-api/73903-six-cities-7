@@ -29,3 +29,7 @@ export function getRandomUserPassword(passwordLength: number = 8): string {
   }
   return password;
 }
+
+export function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : '';
+}
