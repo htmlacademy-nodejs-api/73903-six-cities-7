@@ -1,0 +1,90 @@
+{
+  "api": {
+    "cities": [
+      "Paris",
+      "Cologne",
+      "Brussels",
+      "Amsterdam",
+      "Hamburg",
+      "Dusseldorf"
+    ],
+    "titles": [
+      "Роскошные апартаменты в Париже",
+      "Уютные студии в Кёльне",
+      "Современные квартиры в Брюсселе",
+      "Комфортабельные дома в Амстердаме",
+      "Стильные студии в Гамбурге",
+      "Апартаменты с видом на Дюссельдорф",
+      "Роскошные пентхаусы в Париже",
+      "Бюджетные отели в Кёльне",
+      "Семейные дома в Брюсселе",
+      "Дешёвое жильё в Амстердаме"
+    ],
+    "descriptions": [
+      "Уютная квартира в историческом центре Парижа",
+      "Просторная квартира с видом на Кельнский собор",
+      "Современная квартира в центре Брюсселя с балконом",
+      "Апартаменты у канала в Амстердаме",
+      "Уютная студия в историческом центре Гамбурга",
+      "Просторная квартира с видом на Дюссельдорф",
+      "Шикарная квартира в центре Парижа с террасой",
+      "Модернизированные апартаменты в сердце Кёльна",
+      "Уютная квартира в историческом центре Брюсселя",
+      "Апартаменты у воды в Амстердаме с собственной парковкой"
+    ],
+    "previewUrls": [
+      "https://mykaleidoscope.ru/uploads/posts/2021-10/1633418190_25-mykaleidoscope-ru-p-kvartira-v-parizhe-interer-krasivo-foto-25.jpg",
+      "https://res.cloudinary.com/homelike/image/upload/w_1024,c_fill/homelike-05%2Fuploads%2Fd90e9ab3-2706-31de-a452-dbce8cdf1930.jpg",
+      "https://a0.muscache.com/im/pictures/f2c0b0b7-08c7-4760-822a-608b947181ad.jpg?im_w=720",
+      "https://kvartblog.ru/uploads/post_photo/3007/3504/5623482_original.jpg",
+      "https://a0.muscache.com/im/pictures/467f173d-ca4d-4757-a1af-2deabdd16376.jpg?im_w=720",
+      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/124546919.jpg?k=053d4c7bab3bfd8e93cb887e22282199ffc55747dcb116d7d2f851db56022775&o=&hp=1"
+    ],
+    "types": [
+      "apartment",
+      "house",
+      "room",
+      "hotel"
+    ],
+    "amenities": [
+      "Breakfast",
+      "AirConditioning",
+      "LaptopFriendlyWorkspace",
+      "BabySeat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "users": [
+      "Иван Иванов",
+      "Олег Сидоров",
+      "Пьер Безухов",
+      "Роланд Дискейн",
+      "Холи Гибни",
+      "Джек Торренс",
+      "Антон Городецкий",
+      "Борис Гесер",
+      "Рокки Бальбоа",
+      "Джон Смит"
+    ],
+    "emails": [
+      "snow@pisem.local",
+      "president@dka.local",
+      "fish@big.local",
+      "test@pisem.local",
+      "freedom@pisem.local",
+      "rolan@pochta.local",
+      "author@mir.local",
+      "test@lost.loca",
+      "kujo-fan@story.local"
+    ],
+    "avatars": [
+      "user.jpg",
+      "photo.jpg",
+      "awesome-avatar.jpg",
+      "roland.jpg",
+      "smite.jpg",
+      "coffee.jpg"
+    ]
+  }
+}

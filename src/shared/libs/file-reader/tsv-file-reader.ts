@@ -1,26 +1,16 @@
-import { readFileSync } from 'node:fs';
+import EventEmitter from 'node:events';
+import { createReadStream } from 'node:fs';
 
 import { FileReader } from './file-reader.interface.js';
 import { Property, User, UserType, City, Amenities, PropertyType, Location } from '../../types/index.js';
 
-export class TSVFileReader implements FileReader {
-  private rawData = '';
+export class TSVFileReader extends EventEmitter implements FileReader {
+  private CHUNK_SIZE = 16384; // 16KB
 
   constructor(
     private readonly filename: string
-  ) {}
-
-  private validateRawData(): void {
-    if (! this.rawData) {
-      throw new Error('File was not read');
-    }
-  }
-
-  private parseRawDataToPropertys(): Property[] {
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((line) => this.parseLineToProperty(line));
+  ) {
+    super();
   }
 
   private parseLineToProperty(line: string): Property {
@@ -89,12 +79,30 @@ export class TSVFileReader implements FileReader {
     return { name, email, avatarUrl, password, type: type as UserType };
   }
 
-  public read(): void {
-    this.rawData = readFileSync(this.filename, { encoding: 'utf-8' });
-  }
+  public async read(): Promise<void> {
+    const readStream = createReadStream(this.filename, {
+      highWaterMark: this.CHUNK_SIZE,
+      encoding: 'utf-8',
+    });
 
-  public toArray(): Property[] {
-    this.validateRawData();
-    return this.parseRawDataToPropertys();
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
+
+    for await (const chunk of readStream) {
+      remainingData += chunk.toString();
+
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
+
+        const parsedProperty = this.parseLineToProperty(completeRow);
+        this.emit('tsc-reader:read-line', parsedProperty);
+      }
+    }
+
+    this.emit('tsc-reader:eof', importedRowCount);
+
   }
 }
