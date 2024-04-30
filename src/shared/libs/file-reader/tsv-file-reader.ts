@@ -2,7 +2,7 @@ import EventEmitter from 'node:events';
 import { createReadStream } from 'node:fs';
 
 import { IFileReaderEntity } from './file-reader.interface.js';
-import { IPropertyEntity, TUserType, EUserTypeEnum, ECityEnum, EAmenitiesEnum, EPropertyTypeEnum, TLocationType } from '../../types/index.js';
+import { IPropertyEntity, IUserEntity, EUserTypeEnum, ECityEnum, EAmenitiesEnum, EPropertyTypeEnum, TLocationType } from '../../types/index.js';
 
 export class TSVFileReader extends EventEmitter implements IFileReaderEntity {
   private CHUNK_SIZE = 16384; // 16KB
@@ -74,7 +74,7 @@ export class TSVFileReader extends EventEmitter implements IFileReaderEntity {
     return Number.parseInt(numberString, 10);
   }
 
-  private parseUser(userString: string): TUserType {
+  private parseUser(userString: string): IUserEntity {
     const [name, email, avatarUrl, password, type] = userString.split(';');
     return { name, email, avatarUrl, password, type: type as EUserTypeEnum };
   }

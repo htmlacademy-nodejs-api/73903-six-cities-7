@@ -1,5 +1,5 @@
 import {EAmenitiesEnum, EPropertyTypeEnum} from './property-type.enum.js';
-import { TUserType } from './user.type.js';
+import { IUserEntity } from './user.type.js';
 import { ECityEnum } from './city-type.enum.js';
 import { TLocationType } from './location.type.js';
 
@@ -18,7 +18,7 @@ export interface IPropertyEntity {
   personsCount: number;
   price: number;
   amenities: EAmenitiesEnum[];
-  user: TUserType;
+  user: IUserEntity;
   commentsCount?: number;
   location: TLocationType;
 }
