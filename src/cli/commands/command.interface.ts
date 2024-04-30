@@ -1,7 +1,7 @@
-export type CommandHelpInfo = {description: string; args?: string};
+export type TCommandHelpInfoType = {description: string; args?: string};
 
-export interface Command {
-    getName(): string;
-    getHelpInfo(): CommandHelpInfo;
+export interface ICommandEntity {
+    get name(): string;
+    get helpInfo(): TCommandHelpInfoType;
     execute(...parameters: string[]): void;
 }

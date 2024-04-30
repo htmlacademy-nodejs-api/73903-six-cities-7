@@ -1,16 +1,18 @@
 import chalk from 'chalk';
-import { Command, CommandHelpInfo } from './command.interface.js';
+import { ICommandEntity, TCommandHelpInfoType } from './command.interface.js';
 import { CLIApplication } from '../cli-application.js';
 
-export class HelpCommand implements Command {
+const MAX_HELP_TEXT = 30;
+
+export class HelpCommand implements ICommandEntity {
   constructor(private readonly app: CLIApplication) {}
 
-  public getName(): string {
+  get name(): string {
     return '--help';
   }
 
-  public getHelpInfo(): CommandHelpInfo {
-    return {description: 'печатает этот текст'};
+  get helpInfo(): TCommandHelpInfoType {
+    return {description: 'информация о доступных командах CLI приложения'};
   }
 
   public async execute(..._parameters: string[]): Promise<void> {
@@ -21,10 +23,11 @@ export class HelpCommand implements Command {
             cli.js --<command> [--arguments]
 
         ${chalk.blue('Команды:')}`);
-    Object.keys(this.app.getCommands()).map((cmdName) => {
-      const command = this.app.getCommand(cmdName);
-      const {description, args} = command.getHelpInfo();
-      console.info(`\t\t${chalk.greenBright(command.getName())}${args ? ` ${chalk.blueBright(args)}` : ''}:\t\t\t# ${description}`);
+    Object.keys(this.app.commands).map((cmdName) => {
+      const command = this.app.getCommandByName(cmdName);
+      const {description, args} = command.helpInfo;
+      const helpTextLength = command.name.length + (args ? args.length : 1);
+      console.info(`\t\t${chalk.greenBright(command.name)}${args ? ` ${chalk.blueBright(args)}` : ''}:${'\t#'.padStart(MAX_HELP_TEXT - helpTextLength)} ${description}`);
     });
   }
 }

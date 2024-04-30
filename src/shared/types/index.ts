@@ -1,8 +1,8 @@
-export { Comment } from './comment.type.js';
-export { Property } from './property.type.js';
-export { User } from './user.type.js';
-export { City } from './city-type.enum.js';
-export { Amenities, PropertyType } from './property-type.enum.js';
-export { UserType } from './user-type.enum.js';
-export { Location } from './location.type.js';
-export { MockServerData } from './mock-server-data.type.js';
+export { ICommentEntity } from './comment.type.js';
+export { IPropertyEntity } from './property.type.js';
+export { TUserType } from './user.type.js';
+export { ECityEnum } from './city-type.enum.js';
+export { EAmenitiesEnum, EPropertyTypeEnum } from './property-type.enum.js';
+export { EUserTypeEnum } from './user-type.enum.js';
+export { TLocationType } from './location.type.js';
+export { TMockServerDataType } from './mock-server-data.type.js';

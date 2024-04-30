@@ -1,3 +1,3 @@
-export interface PropertyGenerator {
+export interface IPropertyGeneratorEntity {
   generate(): string;
 }
