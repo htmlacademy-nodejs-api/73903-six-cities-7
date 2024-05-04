@@ -6,3 +6,4 @@ export { EAmenitiesEnum, EPropertyTypeEnum } from './property-type.enum.js';
 export { EUserTypeEnum } from './user-type.enum.js';
 export { TLocationType } from './location.type.js';
 export { TMockServerDataType } from './mock-server-data.type.js';
+export { Component } from './component.enum.js';
