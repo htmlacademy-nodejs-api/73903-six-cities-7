@@ -1,24 +1,24 @@
-import {Amenities, PropertyType} from './property-type.enum.js';
-import { User } from './user.type.js';
-import { City } from './city-type.enum.js';
-import { Location } from './location.type.js';
+import {EAmenitiesEnum, EPropertyTypeEnum} from './property-type.enum.js';
+import { IUserEntity } from './user.type.js';
+import { ECityEnum } from './city-type.enum.js';
+import { TLocationType } from './location.type.js';
 
-export type Property = {
+export interface IPropertyEntity {
   title: string;
   description: string;
   postDate: Date;
-  city: City;
+  city: ECityEnum;
   previewUrl: string;
   photos: string[];
   isPremium: boolean;
   isFavorites: boolean;
   rating: number;
-  type: PropertyType;
+  type: EPropertyTypeEnum;
   roomsCount: number;
   personsCount: number;
   price: number;
-  amenities: Amenities[];
-  user: User;
+  amenities: EAmenitiesEnum[];
+  user: IUserEntity;
   commentsCount?: number;
-  location: Location;
-};
+  location: TLocationType;
+}

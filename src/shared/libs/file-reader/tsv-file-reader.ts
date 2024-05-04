@@ -1,10 +1,10 @@
 import EventEmitter from 'node:events';
 import { createReadStream } from 'node:fs';
 
-import { FileReader } from './file-reader.interface.js';
-import { Property, User, UserType, City, Amenities, PropertyType, Location } from '../../types/index.js';
+import { IFileReaderEntity } from './file-reader.interface.js';
+import { IPropertyEntity, IUserEntity, EUserTypeEnum, ECityEnum, EAmenitiesEnum, EPropertyTypeEnum, TLocationType } from '../../types/index.js';
 
-export class TSVFileReader extends EventEmitter implements FileReader {
+export class TSVFileReader extends EventEmitter implements IFileReaderEntity {
   private CHUNK_SIZE = 16384; // 16KB
 
   constructor(
@@ -13,7 +13,7 @@ export class TSVFileReader extends EventEmitter implements FileReader {
     super();
   }
 
-  private parseLineToProperty(line: string): Property {
+  private parseLineToProperty(line: string): IPropertyEntity {
     const [
       title,
       description,
@@ -37,13 +37,13 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       title,
       description,
       postDate: new Date(postDate),
-      city: city as City,
+      city: city as ECityEnum,
       previewUrl,
       photos: this.parsePhotos(photos),
       isPremium:  Boolean(isPremium),
       isFavorites:  Boolean(isFavorites),
       rating: this.parseFloat(rating),
-      type: type as PropertyType,
+      type: type as EPropertyTypeEnum,
       roomsCount: this.parseInt(roomsCount),
       personsCount: this.parseInt(personsCount),
       price: this.parseInt(price),
@@ -53,13 +53,13 @@ export class TSVFileReader extends EventEmitter implements FileReader {
     };
   }
 
-  private parseLocation(locationString: string): Location {
+  private parseLocation(locationString: string): TLocationType {
     const [latitude, longitude] = locationString.split(',').map(Number.parseFloat);
     return {latitude, longitude};
   }
 
-  private parseAmenities(amenitiesString: string): Amenities[] {
-    return amenitiesString.split(',') as Amenities[];
+  private parseAmenities(amenitiesString: string): EAmenitiesEnum[] {
+    return amenitiesString.split(',') as EAmenitiesEnum[];
   }
 
   private parsePhotos(photosString: string): string[] {
@@ -74,9 +74,9 @@ export class TSVFileReader extends EventEmitter implements FileReader {
     return Number.parseInt(numberString, 10);
   }
 
-  private parseUser(userString: string): User {
+  private parseUser(userString: string): IUserEntity {
     const [name, email, avatarUrl, password, type] = userString.split(';');
-    return { name, email, avatarUrl, password, type: type as UserType };
+    return { name, email, avatarUrl, password, type: type as EUserTypeEnum };
   }
 
   public async read(): Promise<void> {
@@ -98,11 +98,11 @@ export class TSVFileReader extends EventEmitter implements FileReader {
         importedRowCount++;
 
         const parsedProperty = this.parseLineToProperty(completeRow);
-        this.emit('tsc-reader:read-line', parsedProperty);
+        this.emit('tsv-reader:read-line', parsedProperty);
       }
     }
 
-    this.emit('tsc-reader:eof', importedRowCount);
+    this.emit('tsv-reader:eof', importedRowCount);
 
   }
 }

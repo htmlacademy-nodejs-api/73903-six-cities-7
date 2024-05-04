@@ -1,14 +1,14 @@
 import got from 'got';
 
-import { Command } from './command.interface.js';
-import { CommandHelpInfo } from './command.interface.js';
-import { MockServerData } from '../../shared/types/index.js';
+import { ICommandEntity } from './command.interface.js';
+import { TCommandHelpInfoType } from './command.interface.js';
+import { TMockServerDataType } from '../../shared/types/index.js';
 import { TSVProperyGenerator } from '../../shared/libs/property-generator/tsv-property-generator.js';
 import { getErrorMessage } from '../../shared/helpers/index.js';
 import { TSVFileWriter } from '../../shared/libs/file-writer/index.js';
 
-export class GenerateCommand implements Command {
-  private initialData: MockServerData;
+export class GenerateCommand implements ICommandEntity {
+  private initialData: TMockServerDataType;
 
   private async load(url: string) {
     try {
@@ -27,12 +27,12 @@ export class GenerateCommand implements Command {
     }
   }
 
-  public getName(): string {
+  get name(): string {
     return '--generate';
   }
 
-  public getHelpInfo(): CommandHelpInfo {
-    return {description: 'генерирует произвольное количество тестовых данных', args: '<n> <path> <url>'};
+  get helpInfo(): TCommandHelpInfoType {
+    return {description: 'генерирует <n> строк тестовых данных из набора по <url> и записывает их в файл <path>', args: '<n> <path> <url>'};
   }
 
   public async execute(...parameters: string[]): Promise<void> {

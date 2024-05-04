@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-import { PropertyGenerator } from './property-generator.interface.js';
-import { MockServerData, UserType } from '../../types/index.js';
+import { IPropertyGeneratorEntity } from './property-generator.interface.js';
+import { TMockServerDataType, EUserTypeEnum } from '../../types/index.js';
 import { generateRandomValue, getRandomItem, getRandomItems, getExactItems, getRandomBoolean, getRandomUserPassword } from '../../helpers/index.js';
 
 const MIN_RAITING = 1;
@@ -22,11 +22,11 @@ const LAST_WEEK_DAY = 7;
 const PHOTOS_DOMAIN = 'https://example.com';
 const USER_AVATARS_DOMAIN = 'https://example.com';
 
-export class TSVProperyGenerator implements PropertyGenerator {
-  constructor(private readonly mockData: MockServerData) {}
+export class TSVProperyGenerator implements IPropertyGeneratorEntity {
+  constructor(private readonly mockData: TMockServerDataType) {}
 
   private getUser(): string {
-    const userType = getRandomItem([UserType.Regular.toLowerCase(), UserType.Pro.toLocaleLowerCase()]);
+    const userType = getRandomItem([EUserTypeEnum.Regular.toLowerCase(), EUserTypeEnum.Pro.toLocaleLowerCase()]);
     const userName = getRandomItem(this.mockData.users);
     const email = getRandomItem(this.mockData.emails);
     const avatar = getRandomItem(this.mockData.avatars);

@@ -1,13 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-import { Command, CommandHelpInfo } from './command.interface.js';
+import { ICommandEntity, TCommandHelpInfoType } from './command.interface.js';
 
-type PackageJSONConfig = {
+type TPackageJSONConfigType = {
   version: string;
 }
 
-function isPackageJSONConfig(value: unknown): value is PackageJSONConfig {
+function isPackageJSONConfig(value: unknown): value is TPackageJSONConfigType {
   return (
     typeof value === 'object' &&
     value !== null &&
@@ -16,7 +16,7 @@ function isPackageJSONConfig(value: unknown): value is PackageJSONConfig {
   );
 }
 
-export class VersionCommand implements Command {
+export class VersionCommand implements ICommandEntity {
   constructor(
     private readonly filePath: string = 'package.json'
   ) {}
@@ -32,12 +32,12 @@ export class VersionCommand implements Command {
     return importedContent.version;
   }
 
-  public getName(): string {
+  get name(): string {
     return '--version';
   }
 
-  public getHelpInfo(): CommandHelpInfo {
-    return {description: 'выводит номер версии'};
+  get helpInfo(): TCommandHelpInfoType {
+    return {description: 'выводит номер версии из package.json приложения'};
   }
 
   public async execute(..._parameters: string[]): Promise<void> {
