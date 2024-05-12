@@ -26,7 +26,7 @@ export class TSVProperyGenerator implements IPropertyGeneratorEntity {
   constructor(private readonly mockData: TMockServerDataType) {}
 
   private getUser(): string {
-    const userType = getRandomItem([EUserTypeEnum.Regular.toLowerCase(), EUserTypeEnum.Pro.toLocaleLowerCase()]);
+    const userType = getRandomItem([EUserTypeEnum.Regular, EUserTypeEnum.Pro]);
     const userName = getRandomItem(this.mockData.users);
     const email = getRandomItem(this.mockData.emails);
     const avatar = getRandomItem(this.mockData.avatars);

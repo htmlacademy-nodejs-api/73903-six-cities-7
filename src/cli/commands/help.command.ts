@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { ICommandEntity, TCommandHelpInfoType } from './command.interface.js';
 import { CLIApplication } from '../cli-application.js';
 
-const MAX_HELP_TEXT = 30;
+const MAX_HELP_TEXT = 50;
 
 export class HelpCommand implements ICommandEntity {
   constructor(private readonly app: CLIApplication) {}
