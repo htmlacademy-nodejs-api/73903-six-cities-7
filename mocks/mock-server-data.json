@@ -41,10 +41,10 @@
       "https://cf.bstatic.com/xdata/images/hotel/max1024x768/124546919.jpg?k=053d4c7bab3bfd8e93cb887e22282199ffc55747dcb116d7d2f851db56022775&o=&hp=1"
     ],
     "types": [
-      "apartment",
-      "house",
-      "room",
-      "hotel"
+      "Apartment",
+      "House",
+      "Room",
+      "Hotel"
     ],
     "amenities": [
       "Breakfast",
